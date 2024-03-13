@@ -44,6 +44,17 @@
 </head>
 
 <body>
+
+	<div id="alertMessage">
+		@if (session()->has('alert'))
+			<div class='alert alert-{{ session('alert') }}'>
+				{{ session('message') }}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		@endif
+	</div>
 	
 	@include('components.header')
 	
@@ -55,6 +66,16 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+	<script>
+		// Ambil elemen alert
+		var alertMessage = document.getElementById('alertMessage');
+		
+		// Tambahkan fungsi untuk menutup alert setelah 3 detik
+		setTimeout(function() {
+			alertMessage.style.display = 'none';
+		}, 4000);
+	</script>
 
 	<!-- top-header and slider -->
 	<!-- here stars scrolling icon -->

@@ -44,13 +44,13 @@ class UserController extends Controller
     public function addcart(Request $request) {
         // dd($request);
         try {
-            DB::transaction(function () use ($request) {
-                $orderId = Order::firstOrCreate(
+            DB::transaction(function () use ($request) { 
+                $order = Order::firstOrCreate(
                     ['user_id' => Auth::user()->id, 'status' => 'cart']
                 );
 
                 $detailOrder = DetailOrder::firstOrCreate(
-                    ['order_id' => $orderId->id, 'product_id' => $request->product_id],
+                    ['order_id' => $order->id, 'product_id' => $request->product_id],
                     ['total' => $request->price] 
                 );
 
@@ -58,9 +58,17 @@ class UserController extends Controller
                     'qty' => $detailOrder->qty+1,
                     'total' => ($detailOrder->qty+1)*$request->price
                 ]);
+
+                $totalQty = DetailOrder::where('order_id', $order->id)->sum('total');
+
+                $order->update([
+                    'total' => $totalQty
+                ]);
             });
+
+            return redirect()->back()->with('alert', 'success')->with('message', 'Berhasil memasukkan ke keranjang...');
         } catch (\Throwable $e) {
-            return 'asdad';
+            return redirect()->back()->with('alert', 'warning')->with('message', 'Something error, try again...');
         }
     }
     
