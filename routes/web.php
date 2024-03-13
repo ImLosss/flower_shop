@@ -26,13 +26,18 @@ use App\Http\Controllers\admin\ProductController;
 
 
 Route::get('/', [UserController::class, 'index'])->name('home');
-Route::get('/login', [UserController::class, 'login'])->middleware('guest');
-Route::get('/register', [UserController::class, 'register'])->middleware('guest');
 Route::get('/category/{id}', [UserController::class, 'category'])->name('category');
 Route::get('/product/{id}', [UserController::class, 'product'])->name('product');
+Route::get('/cart', [UserController::class, 'showcart'])->name('cart');
+
 Route::post('/product/addcart', [UserController::class, 'addcart'])->name('addcart');
+Route::post('/product/updatecart/{id}', [UserController::class, 'updatecart'])->name('updatecart');
+Route::post('/product/deletecart/{id}', [UserController::class, 'deletecart'])->name('deletecart');
 Route::post('/login', [LoginController::class, 'authenticate']);
+
+Route::get('/login', [UserController::class, 'login'])->middleware('guest');
 Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
+Route::get('/register', [UserController::class, 'register'])->middleware('guest');
 
 
 Route::group([

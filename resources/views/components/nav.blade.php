@@ -31,10 +31,10 @@
                             </div>
                         </ul>
                     </li>
-                    @auth
-                        <li><a href="cart.php">Keranjang Saya</a></li>
+                    @role('member')
+                        <li><a href="{{ route('cart') }}">Keranjang Saya</a></li>
                         <li><a href="konfirmasi.php">Daftar Order</a></li>
-                    @endauth
+                    @endrole
                 </ul>
             </div>
         </nav>
