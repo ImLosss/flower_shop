@@ -99,7 +99,28 @@ class CartController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        try {
+            DB::transaction(function () use ($request, $id) { 
+                $data = DetailOrder::findOrFail($id);
+                $order = Order::findOrFail($request->order_id);
+
+                $data->update([
+                    'qty' => $request->jumlah,
+                    'total' => ($data->total / $data->qty) * $request->jumlah
+                ]);
+
+                $total = DetailOrder::where('order_id', $request->order_id)->sum('total');
+
+                $order->update([
+                    'total' => $total
+                ]);
+            });
+
+            return redirect()->back()->with('alert', 'success')->with('message', 'Berhasil mengupdate keranjang...');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('alert', 'warning')->with('message', 'Something error, try again...');
+        }
+
     }
 
     /**

@@ -33,31 +33,33 @@
                     <tbody>
                         @foreach ($cart as $key => $item)
                             <tr class="rem1">
-                                    <td class="invert">{{ $key+1 }}</td>
-                                    <td class="invert"><a href="product.php?idproduk=2"><img src="{{ asset('storage/product/image.png') }}" width="100px" height="100px" /></a></td>
-                                    <td class="invert">{{ $item->product->name }}</td>
-                                    <td class="invert">
-                                        <div class="quantity">
-                                            <div class="quantity-select">
-                                                <form action="{{ route('updatecart', $item->id) }}" method="post" id="updatecart-{{ $item->id }}">
-                                                @csrf
-                                                @method('PATCH')
-                                                    <input type="number" name="jumlah" class="form-control" height="100px" value="{{ $item->qty }}" \>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="invert">Rp{{ number_format($item->product->disc) }}</td>
-                                    <td class="invert">
-                                        <input type="button" class="form-control" value="Update" onclick="document.getElementById('updatecart-{{ $item->id }}').submit();">
-                                        <input type="button" class="form-control" value="Hapus" onclick="document.getElementById('deletecart-{{ $item->id }}').submit();">
-
-                                        {{-- form delete --}}
-                                        <form action="{{ route('deletecart', $item->id) }}" id="deletecart-{{ $item->id }}" method="post">
+                                <td class="invert">{{ $key+1 }}</td>
+                                <td class="invert"><a href="product.php?idproduk=2"><img src="{{ asset('storage/product/image.png') }}" width="100px" height="100px" /></a></td>
+                                <td class="invert">{{ $item->product->name }}</td>
+                                <td class="invert">
+                                    <div class="quantity">
+                                        <div class="quantity-select">
+                                            <form action="{{ route('updatecart', $item->id) }}" method="post" id="updatecart-{{ $item->id }}">
                                             @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </td>
+                                            @method('PATCH')
+                                                <input type="number" name="jumlah" class="form-control" height="100px" value="{{ $item->qty }}" \>
+                                                <input type="hidden" name="product_id" value="{{ $item->product_id }}">
+                                                <input type="hidden" name="order_id" value="{{ $item->order_id }}">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="invert">Rp{{ number_format($item->product->disc) }}</td>
+                                <td class="invert">
+                                    <input type="button" class="form-control" value="Update" onclick="document.getElementById('updatecart-{{ $item->id }}').submit();">
+                                    <input type="button" class="form-control" value="Hapus" onclick="document.getElementById('deletecart-{{ $item->id }}').submit();">
+
+                                    {{-- form delete --}}
+                                    <form action="{{ route('deletecart', $item->id) }}" id="deletecart-{{ $item->id }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
