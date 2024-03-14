@@ -141,8 +141,11 @@ class CartController extends Controller
             $order->update([
                 'total' => $total
             ]);
+
+            $data->delete();
         } else  {
             $order->delete();
+            $data->delete();
             return redirect()->route('home')->with('alert', 'success')->with('message', 'Berhasil menghapus produk dari keranjang');
         }
 
