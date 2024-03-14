@@ -43,6 +43,9 @@
                                             @csrf
                                             @method('PATCH')
                                                 <input type="number" name="jumlah" class="form-control" height="100px" value="{{ $item->qty }}" \>
+                                                @error('jumlah')
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                                 <input type="hidden" name="product_id" value="{{ $item->product_id }}">
                                                 <input type="hidden" name="order_id" value="{{ $item->order_id }}">
                                             </form>
@@ -78,7 +81,7 @@
                     </ul>
                 </div>
                 <div class="checkout-right-basket">
-                    <a href="index.php"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
+                    <a href="{{ route('home') }}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
                     <a href="checkout.php"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Checkout</a>
                 </div>
                 <div class="clearfix"> </div>

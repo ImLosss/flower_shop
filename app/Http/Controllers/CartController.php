@@ -8,6 +8,7 @@ use App\Models\DetailOrder;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -30,7 +31,7 @@ class CartController extends Controller
 
             return view('cart', $data)->with('title', 'Cart');
         } catch (\Throwable $e) {
-            return redirect()->back()->with('alert', 'danger')->with('message', 'Keranjang masih kosong');;
+            return redirect()->route('home')->with('alert', 'danger')->with('message', 'Keranjang masih kosong');;
         }
     }
 
@@ -99,6 +100,9 @@ class CartController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        Validator::make($request->all(), [
+            'jumlah' => 'required|numeric|min:1',
+        ])->validated();
         try {
             DB::transaction(function () use ($request, $id) { 
                 $data = DetailOrder::findOrFail($id);
@@ -128,7 +132,19 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
-        DetailOrder::findOrFail($id)->delete();
+        $data = DetailOrder::findOrFail($id);
+        $order = Order::findOrFail($data->order_id);
+
+        $total = $order->total - $data->total;
+
+        if ($total > 0) {
+            $order->update([
+                'total' => $total
+            ]);
+        } else  {
+            $order->delete();
+            return redirect()->route('home')->with('alert', 'success')->with('message', 'Berhasil menghapus produk dari keranjang');
+        }
 
         return redirect()->back()->with('alert', 'success')->with('message', 'Berhasil menghapus produk dari keranjang');
     }
