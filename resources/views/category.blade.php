@@ -47,7 +47,7 @@
                                                 </div>
                                                 <div class="snipcart-details top_brand_home_details">
                                                     <fieldset>
-                                                        <a href="product.php?idproduk=3"><input type="submit" class="button" value="Lihat Produk" /></a>
+                                                        <a href="{{ route('product', $item->id) }}"><input type="submit" class="button" value="Lihat Produk" /></a>
                                                     </fieldset>
                                                 </div>
                                             </div>

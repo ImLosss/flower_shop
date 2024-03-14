@@ -41,6 +41,7 @@
                                             <div class="quantity-select">
                                                 <form action="{{ route('updatecart', $item->id) }}" method="post" id="updatecart-{{ $item->id }}">
                                                 @csrf
+                                                @method('PATCH')
                                                     <input type="number" name="jumlah" class="form-control" height="100px" value="{{ $item->qty }}" \>
                                                 </form>
                                             </div>
@@ -54,6 +55,7 @@
                                         {{-- form delete --}}
                                         <form action="{{ route('deletecart', $item->id) }}" id="deletecart-{{ $item->id }}" method="post">
                                             @csrf
+                                            @method('DELETE')
                                         </form>
                                     </td>
                             </tr>
