@@ -82,33 +82,10 @@
                 </div>
                 <div class="checkout-right-basket">
                     <a href="{{ route('home') }}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
-                    <a href="checkout.php"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Checkout</a>
+                    <a href="{{ route('checkout') }}"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Checkout</a>
                 </div>
                 <div class="clearfix"> </div>
             </div>
         </div>
 	</div>
-
-    <!--quantity-->
-    <script>
-        $('.value-plus').on('click', function() {
-            var divUpd = $(this).parent().find('.value'),
-                newVal = parseInt(divUpd.text(), 10) + 1;
-            divUpd.text(newVal);
-        });
-
-        $('.value-minus').on('click', function() {
-            var divUpd = $(this).parent().find('.value'),
-                newVal = parseInt(divUpd.text(), 10) - 1;
-            if (newVal >= 1) divUpd.text(newVal);
-        });
-
-        $(document).ready(function(c) {
-            $('.close1').on('click', function(c) {
-                $('.rem1').fadeOut('slow', function(c) {
-                    $('.rem1').remove();
-                });
-            });
-        });
-    </script>
 @endsection

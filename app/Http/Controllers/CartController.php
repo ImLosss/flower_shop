@@ -18,7 +18,7 @@ class CartController extends Controller
     public function index()
     {
         try {
-            Order::where('user_id', Auth::user()->id)->firstOrFail();
+            Order::where('user_id', Auth::user()->id)->where('status', 'cart')->firstOrFail();
 
             $data['data'] = Category::with('product')->get();
             $data['cart'] = DetailOrder::with('order')->with('product')
@@ -31,7 +31,7 @@ class CartController extends Controller
 
             return view('cart', $data)->with('title', 'Cart');
         } catch (\Throwable $e) {
-            return redirect()->route('home')->with('alert', 'danger')->with('message', 'Keranjang masih kosong');;
+            return redirect()->route('home')->with('alert', 'danger')->with('message', 'Keranjang masih kosong');
         }
     }
 

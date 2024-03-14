@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,15 +36,19 @@ Route::get('/login', [UserController::class, 'login'])->middleware('guest');
 Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
 Route::get('/register', [UserController::class, 'register'])->middleware('guest');
 
-Route::resource('cart', CartController::class) ->names([
+Route::resource('cart', CartController::class)->only(['index', 'store', 'update', 'destroy'])->names([
     'index'   => 'cart',
-    'create'  => 'product.create',
     'store'   => 'addcart',
-    'show'    => 'product.show',
-    'edit'    => 'product.edit',
     'update'  => 'updatecart',
     'destroy' => 'deletecart',
-]);
+])->middleware('auth');
+
+Route::resource('checkout', CheckoutController::class)->only(['index', 'store', 'update', 'destroy'])->names([
+    'index'   => 'checkout',
+    'store'   => 'store',
+    'update'  => 'checkout.confirm',
+    'destroy' => 'destroy',
+])->middleware('auth');
 
 Route::group([
     'middleware' => ['auth', 'role:admin'],
