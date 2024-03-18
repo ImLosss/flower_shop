@@ -5,14 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Confirm extends Model
 {
     use HasFactory;
 
+    protected $table = 'confirm';
     protected $guarded = ['id'];
-
-    public function detailOrder()
-    {
-        return $this->hasMany(DetailOrder::class);
-    }
 }

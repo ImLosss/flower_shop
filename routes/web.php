@@ -9,6 +9,7 @@ use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,20 +22,29 @@ use App\Http\Controllers\CheckoutController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
+// mainRoute
 
 Route::get('/', [UserController::class, 'index'])->name('home');
 Route::get('/category/{id}', [UserController::class, 'category'])->name('category');
 Route::get('/product/{id}', [UserController::class, 'product'])->name('product');
 
-Route::post('/login', [LoginController::class, 'authenticate']);
+// endRoute
 
-Route::get('/login', [UserController::class, 'login'])->middleware('guest');
+// routeAuthenticate
+
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
 Route::get('/register', [UserController::class, 'register'])->middleware('guest');
+
+// endRoute
+
+// routeCartAndCheckout
+
+Route::resource('checkout', CheckoutController::class)->only(['index', 'update'])->names([
+    'index'   => 'checkout',
+    'update'  => 'checkout.confirm',
+])->middleware('auth');
 
 Route::resource('cart', CartController::class)->only(['index', 'store', 'update', 'destroy'])->names([
     'index'   => 'cart',
@@ -43,12 +53,26 @@ Route::resource('cart', CartController::class)->only(['index', 'store', 'update'
     'destroy' => 'deletecart',
 ])->middleware('auth');
 
-Route::resource('checkout', CheckoutController::class)->only(['index', 'store', 'update', 'destroy'])->names([
-    'index'   => 'checkout',
-    'store'   => 'store',
-    'update'  => 'checkout.confirm',
-    'destroy' => 'destroy',
-])->middleware('auth');
+// endRoute
+
+// routeOrderController
+
+Route::group([
+    'middleware' => ['auth', 'role:member'],
+    'namespace' => 'App\Http\Controllers',
+    'prefix' => '/',
+], function () {
+    Route::resource('order', OrderController::class)->only(['index', 'update', 'show', 'edit', 'store', 'destroy'])->names([
+        'index'   => 'order',
+        'update'  => 'order.confirm',
+        'show'  => 'order.view',
+        'edit' => 'confirm',
+        'store' => 'order.storepayment',
+        'destroy' => 'order.destroy'
+    ]);
+});
+
+// endRoute
 
 Route::group([
     'middleware' => ['auth', 'role:admin'],

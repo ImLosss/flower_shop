@@ -33,7 +33,7 @@
                     </li>
                     @role('member')
                         <li><a href="{{ route('cart') }}">Keranjang Saya</a></li>
-                        <li><a href="konfirmasi.php">Daftar Order</a></li>
+                        <li><a href="{{ route('order') }}">Daftar Order</a></li>
                     @endrole
                 </ul>
             </div>

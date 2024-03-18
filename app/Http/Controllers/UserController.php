@@ -3,14 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\DetailOrder;
-use App\Models\Order;
 use App\Models\Product;
-use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
