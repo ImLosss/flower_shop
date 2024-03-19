@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\OrderController as AdminOrderController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\CartController;
@@ -94,6 +95,16 @@ Route::group([
 
     Route::resource('product', ProductController::class) ->names([
         'index'   => 'product.index',
+        'create'  => 'product.create',
+        'store'   => 'product.store',
+        'show'    => 'product.show',
+        'edit'    => 'product.edit',
+        'update'  => 'product.update',
+        'destroy' => 'product.destroy',
+    ]);
+
+    Route::resource('manageorder', AdminOrderController::class) ->names([
+        'index'   => 'manageorder.index',
         'create'  => 'product.create',
         'store'   => 'product.store',
         'show'    => 'product.show',

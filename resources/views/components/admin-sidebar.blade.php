@@ -6,10 +6,10 @@
                 <ul class="metismenu" id="menu">
                     <li class="{{ (Request::is('admin') ? 'active' : '') }}"><a href="index.php"><span>Home</span></a></li>
                     <li><a href="../"><span>Kembali ke Toko</span></a></li>
-                    <li>
-                        <a href="manageorder.php"><i class="ti-dashboard"></i><span>Kelola Pesanan</span></a>
+                    <li class="{{ (Request::is('admin/manageorder') ? 'active' : '') }}">
+                        <a href="{{ route('admin.manageorder.index') }}"><i class="ti-dashboard"></i><span>Kelola Pesanan</span></a>
                     </li>
-                    <li class="{{ (Request::is('admin/*') ? 'active' : '') }}">
+                    <li class="{{ (Request::is('admin/category', 'admin/product') ? 'active' : '') }}">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout"></i><span>Kelola Toko
                             </span></a>
                         <ul class="collapse">
