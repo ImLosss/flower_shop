@@ -9,6 +9,8 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $table = 'orders';
+
     protected $guarded = ['id'];
 
     public function detailOrder()
@@ -19,5 +21,15 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
+    }
+
+    public function confirm()
+    {
+        return $this->hasOne(Confirm::class);
     }
 }

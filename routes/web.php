@@ -103,14 +103,18 @@ Route::group([
         'destroy' => 'product.destroy',
     ]);
 
-    Route::resource('manageorder', AdminOrderController::class) ->names([
+    // routeOrderController
+
+    Route::resource('manageorder', AdminOrderController::class)->only(['index', 'show', 'destroy'])->names([
         'index'   => 'manageorder.index',
-        'create'  => 'product.create',
-        'store'   => 'product.store',
-        'show'    => 'product.show',
-        'edit'    => 'product.edit',
-        'update'  => 'product.update',
+        'show'    => 'manageorder.show',
         'destroy' => 'product.destroy',
     ]);
+
+    Route::patch('/manageorder/{invoice}', [AdminOrderController::class, 'confirmPayment'])->name('manageorder.confirm');
+    Route::patch('/manageorder/{invoice}', [AdminOrderController::class, 'kirim'])->name('manageorder.kirim');
+    Route::patch('/manageorder/{invoice}', [AdminOrderController::class, 'selesaikan'])->name('manageorder.selesai');
+
+    // endRoute
 });
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Confirm;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $data = Order::with('user')->get();
+        $data = Order::with('user')->where('status', '!=', 'payment')->where('status', '!=', 'Done')->get();
 
         // dd($data);
         return view('admin.manageorder', compact('data'));
@@ -38,9 +40,11 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $invoice)
     {
-        //
+        $data = Order::with(['user', 'confirm', 'detailOrder.product'])->where('invoice', $invoice)->firstOrFail();
+
+        return view('admin.showorder', compact('data'));
     }
 
     /**
@@ -56,7 +60,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return 'asd';
     }
 
     /**
@@ -65,5 +69,50 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function confirmPayment(Request $request, string $invoice) {
+        try {
+            $order = Order::where('invoice', $invoice)->firstOrFail();
+
+            $order->update([
+                'status' => 'proses'
+            ]);
+
+            return redirect()->back()->with('alert', 'success')->with('message', 'Data updated succesfully');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('alert', 'error')->with('message', 'Something error...');
+        }
+        
+    }
+
+    public function kirim(Request $request, string $invoice) {
+        try {
+            $order = Order::where('invoice', $invoice)->firstOrFail();
+
+            $order->update([
+                'status' => 'pengiriman'
+            ]);
+
+            return redirect()->back()->with('alert', 'success')->with('message', 'Data updated succesfully');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('alert', 'error')->with('message', 'Something error...');
+        }
+        
+    }
+
+    public function selesaikan(Request $request, string $invoice) {
+        try {
+            $order = Order::where('invoice', $invoice)->firstOrFail();
+
+            $order->update([
+                'status' => 'Done'
+            ]);
+
+            return redirect()->route('admin.manageorder.index')->with('alert', 'success')->with('message', 'Data updated succesfully');
+        } catch (\Throwable $e) {
+            return redirect()->route('admin.manageorder.index')->with('alert', 'error')->with('message', 'Something error...');
+        }
+        
     }
 }

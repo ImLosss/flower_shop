@@ -30,38 +30,38 @@
 							</div>
 							<div class="agile_top_brands_grids">
                                 @foreach ($data as $category)
-                                @foreach ($category->product as $item)
-                                    <div class="col-md-4 top_brand_left" style="padding-bottom: 10p">
-                                        <div class="hover14 column">
-                                            <div class="agile_top_brand_left_grid">
-                                                <div class="agile_top_brand_left_grid_pos">
-                                                    <img src="{{ asset('images/offer.png') }}" alt=" " class="img-responsive" />
-                                                </div>
-                                                <div class="agile_top_brand_left_grid1">
-                                                    <figure>
-                                                        <div class="snipcart-item block">
-                                                            <div class="snipcart-thumb">
-                                                                <a href="product.php?idproduk=1"><img title=" " alt=" " src="{{ asset('storage/'.$item->src_img) }}" width="200px" height="200px" /></a>
-                                                                <p>{{ $item->name }}</p>
-                                                                <div class="stars">
-                                                                    @for ($i = 1; $i <= $item->rate; $i++)
-                                                                        <i class="fa fa-star blue-star" aria-hidden="true"></i>
-                                                                    @endfor
+                                    @foreach ($category->product as $item)
+                                        <div class="col-md-4 top_brand_left" style="padding-bottom: 10p">
+                                            <div class="hover14 column">
+                                                <div class="agile_top_brand_left_grid">
+                                                    <div class="agile_top_brand_left_grid_pos">
+                                                        <img src="{{ asset('images/offer.png') }}" alt=" " class="img-responsive" />
+                                                    </div>
+                                                    <div class="agile_top_brand_left_grid1">
+                                                        <figure>
+                                                            <div class="snipcart-item block">
+                                                                <div class="snipcart-thumb">
+                                                                    <a href="product.php?idproduk=1"><img title=" " alt=" " src="{{ asset('storage/'.$item->src_img) }}" width="200px" height="200px" /></a>
+                                                                    <p>{{ $item->name }}</p>
+                                                                    <div class="stars">
+                                                                        @for ($i = 1; $i <= $item->rate; $i++)
+                                                                            <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                                        @endfor
+                                                                    </div>
+                                                                    <h4>Rp. {{ $item->disc }}<span>{{ $item->price }}</span></h4>
                                                                 </div>
-                                                                <h4>Rp. {{ $item->disc }}<span>{{ $item->price }}</span></h4>
+                                                                <div class="snipcart-details top_brand_home_details">
+                                                                    <fieldset>
+                                                                        <a href="{{ route('product', $item->id) }}"><input type="submit" class="button" value="Lihat Produk" /></a>
+                                                                    </fieldset>
+                                                                </div>
                                                             </div>
-                                                            <div class="snipcart-details top_brand_home_details">
-                                                                <fieldset>
-                                                                    <a href="{{ route('product', $item->id) }}"><input type="submit" class="button" value="Lihat Produk" /></a>
-                                                                </fieldset>
-                                                            </div>
-                                                        </div>
-                                                    </figure>
-                                                    
+                                                        </figure>
+                                                        
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     @endforeach
                                 @endforeach
                                 

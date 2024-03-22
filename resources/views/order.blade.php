@@ -35,7 +35,7 @@
                             <td class="invert">{{ $key+1 }}</td>
                             <td class="invert"><a href="{{ route('order.view', $item->invoice) }}">{{ $item->invoice }}</a></td>
                             <td class="invert">{{ $item->updated_at }}</td>
-                            <td class="invert">Rp{{ number_format($item->total) }}</td>
+                            <td class="invert">Rp{{ number_format($item->total+10000) }}</td>
 
                             <td class="invert">
                                 <div class="rem">
@@ -43,6 +43,8 @@
                                         <a href="{{ route('confirm', $item->invoice) }}">Konfirmasi</a>
                                     @elseif($item->status == 'pending')
                                         Dalam proses verifikasi pembayaran
+                                    @else
+                                        {{ $item->status }}
                                     @endif
                                 </div>
                             </td>  

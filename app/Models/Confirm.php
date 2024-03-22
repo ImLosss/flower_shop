@@ -11,4 +11,9 @@ class Confirm extends Model
 
     protected $table = 'confirm';
     protected $guarded = ['id'];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }
