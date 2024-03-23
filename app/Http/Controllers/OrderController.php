@@ -53,7 +53,7 @@ class OrderController extends Controller
                 'user_id'             => Auth::user()->id,
                 'payment_id'          => $request->payment_id,
                 'sender_account_name' => $request->name,
-                'proof_of_payment'    => $request->file('buktiTransaksi')->store('product'),
+                'proof_of_payment'    => $request->file('buktiTransaksi')->store('transaction'),
             ]);
 
             $order->update([

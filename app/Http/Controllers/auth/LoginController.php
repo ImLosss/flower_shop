@@ -18,6 +18,6 @@ class LoginController extends Controller
             return redirect()->intended('/');
         }
 
-        return back()->with('failed', 'Username/Password salah');
+        return back()->with('alert', 'alert-warning')->with('message', 'Username/Password salah');
     }
 }

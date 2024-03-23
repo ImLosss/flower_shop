@@ -73,12 +73,13 @@
                 <h2>Total harga yang tertera di atas sudah termasuk ongkos kirim sebesar Rp10.000</h2>
                 <h2>Bila telah melakukan pembayaran, harap konfirmasikan pembayaran Anda.</h2>
                 <br>
-
-                    <img src="{{ asset('storage/product/image.png') }}" width="300px" height="200px"><br>
-                    <h4>dana - 2121<br>
-                        a/n. Ryan</h4><br>
+                @foreach ($payments as $payment)
+                    <img src="{{ asset('storage/'.$payment->logo) }}" width="300px" height="200px"><br>
+                    <h4>{{ $payment->norek }}<br>
+                        a/n. {{ $payment->name }}</h4><br>
                     <br>
                     <hr>
+                @endforeach
                 <br>
                 <br>
                 <p>Orderan anda Akan Segera kami proses 1x24 Jam Setelah Anda Melakukan Pembayaran ke ATM kami dan menyertakan informasi pribadi yang melakukan pembayaran seperti Nama Pemilik Rekening / Sumber Dana, Tanggal Pembayaran, Metode Pembayaran dan Jumlah Bayar.</p>

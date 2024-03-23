@@ -9,7 +9,7 @@
                 @auth
                     <li style="color:white">Halo, {{ Auth::user()->name }}
                     @role('admin')
-                        <li><a href="{{ route('admin.') }}">Admin Panel</a></li>
+                        <li><a href="{{ route('admin.index') }}">Admin Panel</a></li>
                     @endrole
                     <li><a href="/logout">Keluar?</a></li>
                 @else

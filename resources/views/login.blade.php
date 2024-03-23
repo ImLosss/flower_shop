@@ -20,9 +20,9 @@
 			<h2>Masuk</h2>
 
 			<div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
-                @if (session()->has('failed'))
-                    <div class='alert alert-warning'>
-                        {{ session('failed') }}
+                @if (session()->has('alert'))
+                    <div class='alert {{ session('alert') }}'>
+                        {{ session('message') }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -42,7 +42,7 @@
 				</form>
 			</div>
 			<h4>Belum terdaftar?</h4>
-			<p><a href="registered.php">Daftar Sekarang</a></p>
+			<p><a href="{{ route('register') }}">Daftar Sekarang</a></p>
 		</div>
 	</div>
 	<!-- //login -->

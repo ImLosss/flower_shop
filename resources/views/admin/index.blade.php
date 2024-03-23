@@ -17,7 +17,7 @@
                                     <h4 class="header-title mb-0">Pelanggan</h4>
                                 </div>
                                 <div class="d-flex justify-content-between pb-2">
-                                    <h1>1231</h1>
+                                    <h1>{{ $pelanggan }}</h1>
                                 </div>
                                 </div>
                         </div>
@@ -31,7 +31,7 @@
                                     <h4 class="header-title mb-0">Pesanan</h4>
                                 </div>
                                 <div class="d-flex justify-content-between pb-2">
-                                    <h1>2323</h1>
+                                    <h1>{{ $pesanan }}</h1>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                     <h4 class="header-title mb-0">Konfirmasi Pembayaran</h4>
                                 </div>
                                 <div class="d-flex justify-content-between pb-2">
-                                    <h1>2132</h1>
+                                    <h1>{{ $konfirmasi }}</h1>
                                 </div>
                             </div>
                         </div>

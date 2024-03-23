@@ -20,15 +20,15 @@ class PaymentSeeder extends Seeder
         ]);
 
         Payment::create([
-            'name' => 'Bank Mandiri',
+            'name' => 'Dana | Ryan_syah',
             'norek' => '943248844843',
-            'logo' => 'payments/mandiri.jpg'
+            'logo' => 'payments/dana.png'
         ]);
 
         Payment::create([
-            'name' => 'Dana | Ryan_syah',
+            'name' => 'Gopay | Ryan_syah',
             'norek' => '082192598451',
-            'logo' => 'payments/dana.png'
+            'logo' => 'payments/gopay.jpg'
         ]);
     }
 }

@@ -18,7 +18,8 @@ class UserController extends Controller
     }
 
     public function register() {
-        return view('register');
+        $data['data'] = Category::get();
+        return view('register', $data)->with('title', 'Registrasi');
     }
 
     public function category($id) {

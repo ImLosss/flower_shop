@@ -20,20 +20,39 @@
 			<h2>Daftar Disini</h2>
 			<div class="login-form-grids">
 				<h5>Informasi Pribadi</h5>
-				<form method="post">
-					<input type="text" name="nama" placeholder="Nama Lengkap" required>
-					<input type="text" name="telp" placeholder="Nomor Telepon" required maxlength="13">
+				<form method="post" action="{{ route('register') }}">
+					@csrf
+					<input type="text" name="name" placeholder="Nama Lengkap" required>
+					<input type="text" name="notelp" placeholder="Nomor Telepon" required>
 					<input type="text" name="alamat" placeholder="Alamat Lengkap" required>
+
+					@error('nama')
+						<small class="text-danger">{{ $message }}</small>
+					@enderror
+					@error('notelp')
+						<small class="text-danger">{{ $message }}</small>
+					@enderror
+					@error('alamat')
+						<small class="text-danger">{{ $message }}</small>
+					@enderror
 				
-				<h6>Informasi Login</h6>
+					<h6>Informasi Login</h6>
 					
 					<input type="email" name="email" placeholder="Email" required="@">
-					<input type="password" name="pass" placeholder="Password" required>
-					<input type="submit" name="adduser" value="Daftar">
+					<input type="password" name="password" placeholder="Password" required>
+
+					@error('email')
+						<small class="text-danger">{{ $message }}</small>
+					@enderror
+					@error('password')
+						<small class="text-danger">{{ $message }}</small>
+					@enderror
+
+					<input type="submit" value="Daftar">
 				</form>
 			</div>
 			<div class="register-home">
-				<a href="index.php">Batal</a>
+				<a href="{{ route('home') }}">Batal</a>
 			</div>
 		</div>
 	</div>

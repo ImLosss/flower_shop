@@ -14,10 +14,9 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $data['data'] = DetailOrder::with(['order.user', 'product'])
-        ->whereHas('order', function ($query) {
-            $query->where('status', 'Done');
-        })->get();
+        $data['data'] = Order::with('user')->where('status', 'Done')->get();
+
+        // dd($data);
 
         $data['total'] = Order::where('status', 'Done')->sum('total');
 
@@ -28,10 +27,7 @@ class ReportController extends Controller
 
     public function print() 
     {
-        $data['data'] = DetailOrder::with(['order.user', 'product'])
-        ->whereHas('order', function ($query) {
-            $query->where('status', 'Done');
-        })->get();
+        $data['data'] = Order::with('user')->where('status', 'Done')->get();
 
         $data['total'] = Order::where('status', 'Done')->sum('total');
 

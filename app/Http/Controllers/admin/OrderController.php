@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $data = Order::with('user')->where('status', '!=', 'payment')->where('status', '!=', 'Done')->get();
+        $data = Order::with('user')->where('status', '!=', 'payment')->where('status', '!=', 'Done')->where('status', '!=', 'cart')->get();
 
         // dd($data);
         return view('admin.manageorder', compact('data'));

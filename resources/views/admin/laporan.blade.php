@@ -16,8 +16,6 @@
                                     <th>No</th>
                                     <th>Invoice</th>
                                     <th>Nama Customer</th>
-                                    <th>Produk</th>
-                                    <th>Jumlah</th>
                                     <th>Total</th>
                                     <th>Tanggal Order</th>
                                     <th>Status</th>
@@ -32,19 +30,16 @@
                                     @foreach ($data as $key => $item)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ $item->order->invoice }}</td>
-                                            <td>{{ $item->order->user->name }}</td>
-                                            <td>{{ $item->product->name }}</td>
-                                            <td>{{ $item->qty }}</td>
+                                            <td><strong><a href="{{ route('admin.manageorder.show', $item->invoice) }}">{{ $item->invoice }}</a></strong></td>
+                                            <td>{{ $item->user->name }}</td>
                                             <td>Rp{{ $item->total }}</td>
                                             <td>{{ $item->updated_at }}</td>
-                                            <td>{{ $item->order->status }}</td>
+                                            <td>{{ $item->status }}</td>
                                         </tr>	
                                     @endforeach
-                                
                             </tbody>
                             <tr>
-                                <td colspan="5" class="text-center"><b>TOTAL</b></td>
+                                <td colspan="3" class="text-center"><b>TOTAL</b></td>
                                 <td><b>Rp{{ number_format($total) }}</b></td>
                             </tr>
                             @endif

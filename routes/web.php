@@ -6,10 +6,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\OrderController as AdminOrderController;
+use App\Http\Controllers\admin\PaymentController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\UserController as AdminUserController;
+use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
@@ -35,7 +37,8 @@ Route::get('/product/{id}', [UserController::class, 'product'])->name('product')
 
 // routeAuthenticate
 
-Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+Route::post('/register', [RegisterController::class, 'register'])->name('register')->middleware('guest');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
 Route::get('/register', [UserController::class, 'register'])->middleware('guest');
@@ -83,8 +86,11 @@ Route::group([
     'prefix'     => 'admin',
     'as'         => 'admin.'
 ], function () {
-    Route::get('/', [AdminController::class, 'index']);
+    Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+    // routeCategory
+
     Route::resource('category', CategoryController::class)->only(['destroy', 'index', 'store'])->names([
         'index'   => 'category.index',
         'create'  => 'category.create',
@@ -95,6 +101,10 @@ Route::group([
         'destroy' => 'category.destroy',
     ]);
 
+    // endRoute
+
+    // routeProduct
+
     Route::resource('product', ProductController::class) ->names([
         'index'   => 'product.index',
         'create'  => 'product.create',
@@ -104,6 +114,8 @@ Route::group([
         'update'  => 'product.update',
         'destroy' => 'product.destroy',
     ]);
+
+    // endRoute
 
     // routeOrderController
 
@@ -135,7 +147,17 @@ Route::group([
         'destroy' => 'user.destroy',
     ]);
 
-    // Route::get('/laporan/print', [ReportController::class, 'print'])->name('laporan.print');
+    Route::get('/laporan/print', [ReportController::class, 'print'])->name('laporan.print');
+
+    // endRoute
+
+    // routePaymentController
+
+    Route::resource('payment', PaymentController::class)->only(['index', 'destroy', 'store'])->names([
+        'index'   => 'payment.index',
+        'destroy' => 'payment.destroy',
+        'store'   => 'payment.store'
+    ]);
 
     // endRoute
 });

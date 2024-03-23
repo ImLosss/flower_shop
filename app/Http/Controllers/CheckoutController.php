@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DetailOrder;
+use App\Models\Payment;
 
 class CheckoutController extends Controller
 {
@@ -23,6 +24,7 @@ class CheckoutController extends Controller
             $query->where('user_id', Auth::user()->id)->where('status', 'cart');
         })
         ->get();
+        $data['payments'] = Payment::get();
 
         return view('checkout', $data)->with('title', 'Checkout');
     }
