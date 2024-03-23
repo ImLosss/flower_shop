@@ -18,8 +18,8 @@
                             <li><a href="pembayaran.php">Metode Pembayaran</a></li>
                         </ul>
                     </li>
-                    <li><a href="laporan.php"><span>Laporan</span></a></li>
-                    <li><a href="customer.php"><span>Kelola Pelanggan</span></a></li>
+                    <li class="{{ (Request::is('admin/laporan', 'admin/laporan/*') ? 'active' : '') }}"><a href="{{ route('admin.laporan.index') }}"><span>Laporan</span></a></li>
+                    <li class="{{ (Request::is('admin/user', 'admin/user/*') ? 'active' : '') }}"><a href="{{ route('admin.user.index') }}"><span>Kelola Pelanggan</span></a></li>
                     <li><a href="user.php"><span>Kelola Staff</span></a></li>
                     <li>
                         <a href="{{ route('admin.logout') }}"><span>Logout</span></a>

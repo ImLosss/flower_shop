@@ -8,6 +8,8 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\OrderController as AdminOrderController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ReportController;
+use App\Http\Controllers\admin\UserController as AdminUserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
@@ -108,12 +110,32 @@ Route::group([
     Route::resource('manageorder', AdminOrderController::class)->only(['index', 'show', 'destroy'])->names([
         'index'   => 'manageorder.index',
         'show'    => 'manageorder.show',
-        'destroy' => 'product.destroy',
     ]);
 
-    Route::patch('/manageorder/{invoice}', [AdminOrderController::class, 'confirmPayment'])->name('manageorder.confirm');
-    Route::patch('/manageorder/{invoice}', [AdminOrderController::class, 'kirim'])->name('manageorder.kirim');
-    Route::patch('/manageorder/{invoice}', [AdminOrderController::class, 'selesaikan'])->name('manageorder.selesai');
+    Route::patch('/manageorder/{invoice}/confirm', [AdminOrderController::class, 'confirmPayment'])->name('manageorder.confirm');
+    Route::patch('/manageorder/{invoice}/kirim', [AdminOrderController::class, 'kirim'])->name('manageorder.kirim');
+    Route::patch('/manageorder/{invoice}/selesai', [AdminOrderController::class, 'selesaikan'])->name('manageorder.selesai');
+
+    // endRoute
+
+    // routeReportController
+
+    Route::resource('laporan', ReportController::class)->only(['index'])->names([
+        'index'   => 'laporan.index',
+    ]);
+
+    Route::get('/laporan/print', [ReportController::class, 'print'])->name('laporan.print');
+
+    // endRoute
+
+    // routeUserController
+
+    Route::resource('user', AdminUserController::class)->only(['index', 'destroy'])->names([
+        'index'   => 'user.index',
+        'destroy' => 'user.destroy',
+    ]);
+
+    // Route::get('/laporan/print', [ReportController::class, 'print'])->name('laporan.print');
 
     // endRoute
 });
