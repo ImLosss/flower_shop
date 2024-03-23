@@ -9,7 +9,7 @@
                     <li class="{{ (Request::is('admin/manageorder') ? 'active' : '') }}">
                         <a href="{{ route('admin.manageorder.index') }}"><i class="ti-dashboard"></i><span>Kelola Pesanan</span></a>
                     </li>
-                    <li class="{{ (Request::is('admin/category', 'admin/product') ? 'active' : '') }}">
+                    <li class="{{ (Request::is('admin/category', 'admin/product', 'admin/payment') ? 'active' : '') }}">
                         <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout"></i><span>Kelola Toko
                             </span></a>
                         <ul class="collapse">

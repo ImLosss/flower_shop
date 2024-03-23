@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -33,6 +34,19 @@ class UserController extends Controller
         $data['product'] = Product::findOrFail($id);
 
         return view('product', $data)->with('title', 'Product');
+    }
+
+    public function search(Request $search)
+    {
+        $keyword = $search->input('search');
+
+        $data = Category::with('product')
+        ->whereHas('product', function ($query) use ($keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        })
+        ->get();
+
+        return view('dashboard', compact('data'))->with('title', 'Home');
     }
     
 }

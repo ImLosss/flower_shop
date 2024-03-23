@@ -18,10 +18,12 @@
                 @endauth
             </ul>
         </div>
-        <div class="product_list_header">
-            <a href="cart.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-            </a>
-        </div>
+        @role('member')
+            <div class="product_list_header">
+                <a href="{{ route('cart') }}"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                </a>
+            </div>
+        @endrole
         <div class="clearfix"> </div>
     </div>
 </div>
@@ -37,8 +39,8 @@
             <h1><a href="/">H & R</a></h1>
         </div>
         <div class="w3l_search">
-            <form action="search.php" method="post">
-                <input type="search" name="Search" placeholder="Cari produk...">
+            <form action="{{ route('product.search') }}" method="get">
+                <input type="search" name="search" placeholder="Cari produk...">
                 <button type="submit" class="btn btn-default search" aria-label="Left Align">
                     <i class="fa fa-search" aria-hidden="true"> </i>
                 </button>

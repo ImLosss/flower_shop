@@ -32,6 +32,7 @@ use App\Http\Controllers\OrderController;
 Route::get('/', [UserController::class, 'index'])->name('home');
 Route::get('/category/{id}', [UserController::class, 'category'])->name('category');
 Route::get('/product/{id}', [UserController::class, 'product'])->name('product');
+Route::get('/product', [UserController::class, 'search'])->name('product.search');
 
 // endRoute
 
