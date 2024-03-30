@@ -26,6 +26,6 @@ class CategorySeeder extends Seeder
             'name' => 'Bunga Papan',
         ]);
 
-        Product::factory(20)->create();
+        Product::factory(30)->create();
     }
 }

@@ -27,6 +27,12 @@
     <script src="{{asset('assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
     {{-- sweet alert --}}
     <script src="{{ asset('js/sweetalert.js') }}"></script>
+
+    {{-- jQuery --}}
+    <script src="{{ asset('js/jquery-1.11.1.min.js') }}"
+    crossorigin="anonymous"></script>
+
+    
 </head>
 
 <body>
@@ -72,8 +78,7 @@
     </div>
     <!-- page container area end -->
 
-    <!-- jquery latest version -->
-    <script src="{{asset('assets/js/vendor/jquery-2.2.4.min.js')}}"></script>
+    
     <!-- bootstrap 4 js -->
     <script src="{{asset('assets/js/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
@@ -99,6 +104,14 @@
     <!-- others plugins -->
     <script src="{{asset('assets/js/plugins.js')}}"></script>
     <script src="{{asset('assets/js/scripts.js')}}"></script>
+    {{-- DataTable JS --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/datatables.min.css') }}">
+    <script
+        src="{{ asset('assets/js/datatables.min.js') }}">
+    </script> 
+
+    @yield('script')
+   
 </body>
 
 </html>

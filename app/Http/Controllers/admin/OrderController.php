@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Confirm;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
 {
@@ -15,10 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $data = Order::with('user')->where('status', '!=', 'payment')->where('status', '!=', 'Done')->where('status', '!=', 'cart')->get();
-
-        // dd($data);
-        return view('admin.manageorder', compact('data'));
+        return view('admin.manageorder');
     }
 
     /**
@@ -114,5 +112,26 @@ class OrderController extends Controller
             return redirect()->route('admin.manageorder.index')->with('alert', 'error')->with('message', 'Something error...');
         }
         
+    }
+
+    public function getOrderData() {
+        $data = Order::with('user')->where('status', '!=', 'payment')->where('status', '!=', 'Done')->where('status', '!=', 'cart');
+        $index = 0;
+        return DataTables::of($data)
+        ->addColumn('no', function($data) use ($index) {
+           return $index+1;
+        })->addColumn('invoice', function($data) {
+            return '<a href="'. route("admin.manageorder.show", $data->invoice) .'">'. $data->invoice .'</a>';
+         })->addColumn('customer', function($data) {
+            return $data->user->name;
+         })->addColumn('tanggal', function($data) {
+            return $data->updated_at;
+         })->addColumn('total', function($data) {
+            return $data->total;
+         })->addColumn('status', function($data) {
+            return $data->status;
+         })
+         ->rawColumns(['invoice'])
+         ->toJson();
     }
 }

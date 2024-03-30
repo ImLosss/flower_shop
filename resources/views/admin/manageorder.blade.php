@@ -12,7 +12,7 @@
                             <h2>Daftar Pesanan</h2>
                         </div>
                         <div class="data-tables datatable-dark">
-                                <table id="dataTable3" class="display" style="width:100%"><thead class="thead-dark">
+                                <table id="dataTable3">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -24,22 +24,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($data->isEmpty())
-                                        <tr>
-                                            <td class="text-center p-4 text-muted" colspan="6"><h4>Order kosong</h4></td>
-                                        </tr>
-                                    @else
-                                        @foreach ($data as $key => $item)
-                                            <tr>
-                                                <td>{{ $key+1 }}</td>
-                                                <td><strong><a href="{{ route('admin.manageorder.show', $item->invoice) }}">{{ $item->invoice }}</a></strong></td>
-                                                <td>{{ $item->user->name }}</td>
-                                                <td>{{ $item->created_at }}</td>
-                                                <td>{{ number_format($item->total) }}</td>
-                                                <td>{{ $item->status }}</td>
-                                            </tr>	
-                                        @endforeach
-                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -48,4 +32,44 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready( function () {
+        $('#dataTable3').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('admin.dataTable.getOrderData') }}"
+            },
+            columns: [
+                {
+                    data: 'no',
+                    name: 'no'
+                },
+                {
+                    data: 'invoice',
+                    name: 'invoice'
+                },
+                {
+                    data: 'customer',
+                    name: 'customer'
+                },
+                {
+                    data: 'tanggal',
+                    name: 'tanggal'
+                },
+                {
+                    data: 'total',
+                    name: 'total'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                }
+            ]
+        });
+    } );
+</script>
 @endsection

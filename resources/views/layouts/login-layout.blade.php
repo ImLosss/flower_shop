@@ -24,6 +24,9 @@
 	<!-- //font-awesome icons -->
 	<!-- js -->
 	<script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+	{{-- datatables --}}
+	<script src="{{ asset('js/datatables.min.js') }}"></script>
+	<link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
 	<!-- //js -->
 	<link href='//fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>

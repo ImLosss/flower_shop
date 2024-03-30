@@ -23,26 +23,44 @@
                         <button style="margin-bottom:20px" data-toggle="modal" data-target="#myModal" class="btn btn-info col-md-2" onclick="reset()">Tambah Produk</button>
                     </div>
                     <div class="data-tables datatable-dark">
-                        <table id="dataTable3">
-                            <thead>
+                        <table id="dataTable3" class="display" style="width:100%">
+                            <thead class="thead-dark">
                                 <tr>
-                                    <th>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="selectAllCheckbox">
-                                        </div>
-                                    </th>
-                                    <th>Gambar</th>
-                                    <th>Nama Produk</th>
-                                    <th>Kategori</th>
-                                    <th>Deskripsi</th>
-                                    <th>Rate</th>
-                                    <th>Harga Awal</th>
-                                    <th>Harga Diskon</th>
-                                    <th>Tanggal</th>
-                                    <th>Aksi</th>
+                                    <th class="pr-4">No.</th>
+                                    <th class="pr-4">Gambar</th>
+                                    <th class="pr-4">Nama Produk</th>
+                                    <th class="pr-4">Kategori</th>
+                                    <th class="pr-4">Deskripsi</th>
+                                    <th class="pr-4">Rate</th>
+                                    <th class="pr-4">Harga Awal</th>
+                                    <th class="pr-4">Harga Diskon</th>
+                                    <th class="pr-4">Tanggal</th>
+                                    <th class="pr-4">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($product as $key => $item)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td width="150px"><img src="{{ asset('storage/' . $item->src_img) }}" width="50%"></td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->category->name }}</td>
+                                        <td>{{ $item->description }}</td>
+                                        <td>{{ $item->rate }}</td>
+                                        <td>{{ $item->price }}</td>
+                                        <td>{{ $item->disc }}</td>
+                                        <td>{{ $item->created_at }}</td>
+                                        <td>
+                                            <div class="card bg-success border-radius-md" style="display: inline-block;" onclick="getdata(this)" data-toggle="modal" data-target="#myModal" data-id="{{ $item->id }}" data-oldimg="{{ $item->src_img }}" data-categoryid="{{ $item->category->id }}" data-name="{{ $item->name }}" data-description="{{ $item->description }}" data-rate="{{ $item->rate }}" data-price="{{ $item->price }}" data-disc="{{ $item->disc }}"><i class="fa fa-edit mx-1 text-white"></i></div>
+                                            <div class="card bg-danger border-radius-md" style="display: inline-block;" onclick="submit({{ $key }})"><i class="fa fa-trash mx-1 text-white"></i></div>
+                                            {{-- form delete --}}
+                                            <form id="form_{{ $key }}" action="{{ route('admin.product.destroy', $item->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -106,9 +124,7 @@
         </div>
     </div>
 </div>
-@endsection
 
-@section('script')
 <script>
     function getdata(data) {
 
@@ -166,87 +182,5 @@
     function submit(key) {
         $('#form_'+key).submit();
     }
-</script>
-
-<script>
-     $(document).ready( function () {
-        $('#dataTable3').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('admin.dataTable.getProduct') }}",
-                type: 'GET'
-            },
-            columns: [
-                {
-                    data: 'select_box',
-                    name: 'select_box',
-                    orderable: false,
-                    searchable: false, 
-                },
-                {
-                    data: 'gambar',
-                    name: 'gambar',
-                    searchable: false
-                },
-                {
-                    data: 'name',
-                    name: 'name',
-                },
-                {
-                    data: 'category',
-                    name: 'category.name'
-                },
-                {
-                    data: 'desc',
-                    name: 'description',
-                },
-                {
-                    data: 'rate',
-                    name: 'rate'
-                },
-                {
-                    data: 'price',
-                    name: 'price'
-                },
-                {
-                    data: 'disc',
-                    name: 'disc'
-                },
-                {
-                    data: 'tanggal',
-                    name: 'updated_at',
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    searchable: false
-                }
-            ]
-        });
-    } );
-
-    $(document).on('change', '.document-checkbox', function() {
-        var selectedDocuments = [];
-        $('.document-checkbox:checked').each(function() {
-            selectedDocuments.push($(this).val());
-        });
-        console.log(selectedDocuments); // Tampilkan data yang dipilih dalam konsol
-        // Anda dapat melakukan apa pun dengan data yang dipilih di sini, misalnya menyimpannya dalam variabel atau mengirimnya ke server
-    });
-
-    $(document).on('change', '#selectAllCheckbox', function() {
-        const checkboxes = document.querySelectorAll('#dataTable3 tbody .form-check-input');
-            
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = selectAllCheckbox.checked;
-        });
-        var selectedDocuments = [];
-        $('.document-checkbox:checked').each(function() {
-            selectedDocuments.push($(this).val());
-        });
-        console.log(selectedDocuments); // Tampilkan data yang dipilih dalam konsol
-        // Anda dapat melakukan apa pun dengan data yang dipilih di sini, misalnya menyimpannya dalam variabel atau mengirimnya ke server
-    });
 </script>
 @endsection

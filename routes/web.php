@@ -116,6 +116,8 @@ Route::group([
         'destroy' => 'product.destroy',
     ]);
 
+    Route::get('/getProduct', [ProductController::class, 'getProduct'])->name('dataTable.getProduct');
+
     // endRoute
 
     // routeOrderController
@@ -125,6 +127,7 @@ Route::group([
         'show'    => 'manageorder.show',
     ]);
 
+    Route::get('/getDataOrder', [AdminOrderController::class, 'getOrderData'])->name('dataTable.getOrderData');
     Route::patch('/manageorder/{invoice}/confirm', [AdminOrderController::class, 'confirmPayment'])->name('manageorder.confirm');
     Route::patch('/manageorder/{invoice}/kirim', [AdminOrderController::class, 'kirim'])->name('manageorder.kirim');
     Route::patch('/manageorder/{invoice}/selesai', [AdminOrderController::class, 'selesaikan'])->name('manageorder.selesai');
