@@ -96,7 +96,7 @@
                                     <td>{{ $data->payment->name }}</td>
                                     <td>{{ $data->confirm->sender_account_name }}</td>
                                     <td>{{ $data->confirm->created_at }}</td>
-                                    <td><img class="thumbnail" src="{{ asset('storage/'.$data->confirm->proof_of_payment) }}" data-fullsize="{{ asset('storage/'.$data->confirm->proof_of_payment) }}" style="width: 50px;"> Klik gambar untuk melihat</td>
+                                    <td><img class="thumbnail" src="{{ asset('image_uploads/'.$data->confirm->proof_of_payment) }}" data-fullsize="{{ asset('image_uploads/'.$data->confirm->proof_of_payment) }}" style="width: 50px;"> Klik gambar untuk melihat</td>
                                 </tr>
                             </tbody>
                         </table>

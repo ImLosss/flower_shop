@@ -10,6 +10,7 @@ use App\Models\Confirm;
 use Illuminate\Support\Facades\DB;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -47,13 +48,23 @@ class OrderController extends Controller
     {
         $order = Order::where('invoice', $request->invoice)->firstOrFail();
 
+        // $gallery = new Gallery();
+        // $gallery->image = $nama_image;
+        // $gallery->save();
         DB::transaction(function () use ($request, $order) {
+
+            $random = strtoupper (Str::random($length = 7));
+ 
+            $image = $request->file('buktiTransaksi');
+            $nama_image   = 'gallery_'.$random.'.'.$image->getClientOriginalExtension();
+            $request->file('buktiTransaksi')->move('image_uploads', $nama_image);
+            
             Confirm::create([
                 'order_id'            => $order->id,
                 'user_id'             => Auth::user()->id,
                 'payment_id'          => $request->payment_id,
                 'sender_account_name' => $request->name,
-                'proof_of_payment'    => $request->file('buktiTransaksi')->store('transaction'),
+                'proof_of_payment'    => $nama_image,
             ]);
 
             $order->update([
