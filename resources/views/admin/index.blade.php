@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
-    
-        
+
+
         <!-- page title area end -->
         <div class="main-content-inner">
-        
-            
+
+
             <div class="sales-report-area mt-5 mb-5">
                 <div class="row">
                     <div class="col-md-4">
@@ -22,7 +22,7 @@
                                 </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-4">
                         <div class="single-report">
                             <div class="s-report-inner pr--20 pt--30 mb-3">
@@ -51,8 +51,8 @@
                     </div>
                 </div>
             </div>
-            
-            
+
+
             <!-- overview area end -->
             <!-- market value area start -->
             <div class="row mt-5 mb-5">
@@ -63,17 +63,17 @@
                                 <h2>Selamat Datang</h2>
                             </div>
                             <div class="market-status-table mt-4">
-                                Anda masuk sebagai <strong>{{Auth::user()->name}}</strong>
+                                Anda masuk sebagai <strong>Awal</strong>
                                 <br>
-                                <p>Pada halaman admin, Anda dapat menambah kategori produk, mengelola produk, 
+                                <p>Pada halaman admin, Anda dapat menambah kategori produk, mengelola produk,
                                 mengelola user dan admin, melihat konfirmasi pembayaran</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-          
-            
+
+
             <!-- row area start-->
         </div>
     <!-- main content area end -->

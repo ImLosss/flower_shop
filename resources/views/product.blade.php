@@ -40,8 +40,7 @@
                         <h4 class="m-sing">Rp{{ $product->disc }}<span>Rp{{ $product->price }}</span></h4>
                     </div>
                     <div class="snipcart-details agileinfo_single_right_details">
-                        <form action="{{ route('addcart') }}" method="post">
-                            @csrf
+                        <form action="#" method="get">
                             <fieldset>
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <input type="hidden" name="price" value="{{ $product->disc }}">

@@ -38,34 +38,21 @@ Route::get('/product', [UserController::class, 'search'])->name('product.search'
 
 // routeAuthenticate
 
-Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'register'])->name('register')->middleware('guest');
-Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
-Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth');
-Route::get('/register', [UserController::class, 'register'])->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/logout', [LogoutController::class, 'logout']);
+Route::get('/register', [UserController::class, 'register']);
 
 // endRoute
 
 // routeCartAndCheckout
-
-Route::resource('checkout', CheckoutController::class)->only(['index', 'update'])->names([
-    'index'   => 'checkout',
-    'update'  => 'checkout.confirm',
-])->middleware('auth');
-
-Route::resource('cart', CartController::class)->only(['index', 'store', 'update', 'destroy'])->names([
-    'index'   => 'cart',
-    'store'   => 'addcart',
-    'update'  => 'updatecart',
-    'destroy' => 'deletecart',
-])->middleware('auth');
 
 // endRoute
 
 // routeOrderController
 
 Route::group([
-    'middleware' => ['auth', 'role:member'],
     'namespace' => 'App\Http\Controllers',
     'prefix' => '/',
 ], function () {
@@ -82,7 +69,6 @@ Route::group([
 // endRoute
 
 Route::group([
-    'middleware' => ['auth', 'role:admin'],
     'namespace'  => 'App\Http\Controllers\admin',
     'prefix'     => 'admin',
     'as'         => 'admin.'
