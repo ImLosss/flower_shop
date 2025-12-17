@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'notelp' => '082192598451',
             'alamat' => 'Polewali',
             'password' => Hash::make('password')
-        ])->assignRole('admin');
+        ]);
 
         User::create([
             'name' => 'Awal',
@@ -29,6 +29,6 @@ class UserSeeder extends Seeder
             'notelp' => '082192598451',
             'alamat' => 'Manding',
             'password' => Hash::make('password')
-        ])->assignRole('member');
+        ]);
     }
 }
