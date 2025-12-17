@@ -94,12 +94,6 @@ Route::group([
 
     Route::resource('category', CategoryController::class)->only(['destroy', 'index', 'store'])->names([
         'index'   => 'category.index',
-        'create'  => 'category.create',
-        'store'   => 'category.store',
-        'show'    => 'category.show',
-        'edit'    => 'category.edit',
-        'update'  => 'category.update',
-        'destroy' => 'category.destroy',
     ]);
 
     // endRoute
@@ -108,15 +102,7 @@ Route::group([
 
     Route::resource('product', ProductController::class) ->names([
         'index'   => 'product.index',
-        'create'  => 'product.create',
-        'store'   => 'product.store',
-        'show'    => 'product.show',
-        'edit'    => 'product.edit',
-        'update'  => 'product.update',
-        'destroy' => 'product.destroy',
     ]);
-
-    Route::get('/getProduct', [ProductController::class, 'getProduct'])->name('dataTable.getProduct');
 
     // endRoute
 
@@ -128,9 +114,6 @@ Route::group([
     ]);
 
     Route::get('/getDataOrder', [AdminOrderController::class, 'getOrderData'])->name('dataTable.getOrderData');
-    Route::patch('/manageorder/{invoice}/confirm', [AdminOrderController::class, 'confirmPayment'])->name('manageorder.confirm');
-    Route::patch('/manageorder/{invoice}/kirim', [AdminOrderController::class, 'kirim'])->name('manageorder.kirim');
-    Route::patch('/manageorder/{invoice}/selesai', [AdminOrderController::class, 'selesaikan'])->name('manageorder.selesai');
 
     // endRoute
 
@@ -140,27 +123,20 @@ Route::group([
         'index'   => 'laporan.index',
     ]);
 
-    Route::get('/laporan/print', [ReportController::class, 'print'])->name('laporan.print');
-
     // endRoute
 
     // routeUserController
 
     Route::resource('user', AdminUserController::class)->only(['index', 'destroy'])->names([
         'index'   => 'user.index',
-        'destroy' => 'user.destroy',
     ]);
-
-    Route::get('/laporan/print', [ReportController::class, 'print'])->name('laporan.print');
 
     // endRoute
 
     // routePaymentController
 
     Route::resource('payment', PaymentController::class)->only(['index', 'destroy', 'store'])->names([
-        'index'   => 'payment.index',
-        'destroy' => 'payment.destroy',
-        'store'   => 'payment.store'
+        'index'   => 'payment.index'
     ]);
 
     // endRoute

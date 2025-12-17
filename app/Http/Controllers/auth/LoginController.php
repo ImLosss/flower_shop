@@ -14,7 +14,9 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
         if(Auth::attempt($credentials)) {
+            $user = Auth::user();
             $request->session()->regenerate();
+            if($user->hasRole('admin')) return redirect()->intended('/admin');
             return redirect()->intended('/');
         }
 

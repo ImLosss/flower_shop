@@ -75,7 +75,7 @@ class ProductController extends Controller
     {
         try {
             $data = Product::findOrFail($id);
-            
+
             $data->update([
                 'category_id' => $request->categoryId,
                 'name' => $request->name,
@@ -98,7 +98,7 @@ class ProductController extends Controller
         } catch (\Throwable $e) {
             return redirect()->back()->with('alert', 'error')->with('message', 'Failed to update data');
         }
-            
+
     }
 
     /**
@@ -115,34 +115,5 @@ class ProductController extends Controller
         } catch (\Throwable $e) {
             return redirect()->back()->with('alert', 'error')->with('message', 'Failed to delete data');
         }
-    }
-
-    public function getProduct() {
-        $data = Product::with('category');
-        return DataTables::of($data)
-        ->addColumn('select_box', function ($data) {
-            $html = '<div class="form-check">
-                        <input class="form-check-input document-checkbox" type="checkbox" name="documentSelect[]" value="'. $data->id .'" id="flexCheckDefault">
-                    </div>';
-            return $html;
-        })->addColumn('gambar', function($data) {
-            return '<img src="'. asset('storage/' . $data->src_img) .'" width="50%">';
-         })->addColumn('category', function($data) {
-            return $data->category->name;
-         })->addColumn('desc', function($data) {
-            return $data->description;
-         })->addColumn('tanggal', function($data) {
-            return $data->updated_at;
-         })->addColumn('action', function($data) {
-            return '<div class="card bg-success border-radius-md" style="display: inline-block;" onclick="getdata(this)" data-toggle="modal" data-target="#myModal" data-id="'. $data->id .'" data-oldimg="'. $data->src_img .'" data-categoryid="'. $data->category->id .'" data-name="'. $data->name .'" data-description="'. $data->description .'" data-rate="'. $data->rate .'" data-price="'. $data->price .'" data-disc="'. $data->disc .'"><i class="fa fa-edit mx-1 text-white"></i></div>
-            <div class="card bg-danger border-radius-md" style="display: inline-block;" onclick="submit('. $data->id .')"><i class="fa fa-trash mx-1 text-white"></i></div>
-            <!-- form untuk delete -->
-            <form id="form_'. $data->id .'" action="'. route('admin.product.destroy', $data->id) .'" method="post">
-            ' . csrf_field() . '
-            ' . method_field('DELETE') . '
-            </form>';
-         })
-         ->rawColumns(['gambar', 'action', 'select_box'])
-         ->toJson();
     }
 }

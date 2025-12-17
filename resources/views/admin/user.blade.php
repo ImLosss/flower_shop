@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('content')   
+@section('content')
 <!-- page title area end -->
 <div class="main-content-inner">
     <!-- market value area start -->
@@ -36,11 +36,11 @@
                                             <form action="{{ route('admin.user.destroy', $item->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <div class="card bg-danger border-radius-md" style="display: inline-block;" onclick="deleteAlert(this)"><i class="fa fa-trash mx-1 text-white"></i></div>
+                                                <div class="card bg-danger border-radius-md" style="display: inline-block;" onclick=""><i class="fa fa-trash mx-1 text-white"></i></div>
                                             </form>
                                         </td>
                                     </tr>
-                                    @endforeach	
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

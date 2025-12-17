@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('content')   
+@section('content')
 @if ($errors->has('name') || $errors->has('image') || $errors->has('categoryId'))
     <div class='alert alert-warning'>
         {{ $errors->first() }}
@@ -169,62 +169,7 @@
 </script>
 
 <script>
-     $(document).ready( function () {
-        $('#dataTable3').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('admin.dataTable.getProduct') }}",
-                type: 'GET'
-            },
-            columns: [
-                {
-                    data: 'select_box',
-                    name: 'select_box',
-                    orderable: false,
-                    searchable: false, 
-                },
-                {
-                    data: 'gambar',
-                    name: 'gambar',
-                    searchable: false
-                },
-                {
-                    data: 'name',
-                    name: 'name',
-                },
-                {
-                    data: 'category',
-                    name: 'category.name'
-                },
-                {
-                    data: 'desc',
-                    name: 'description',
-                },
-                {
-                    data: 'rate',
-                    name: 'rate'
-                },
-                {
-                    data: 'price',
-                    name: 'price'
-                },
-                {
-                    data: 'disc',
-                    name: 'disc'
-                },
-                {
-                    data: 'tanggal',
-                    name: 'updated_at',
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    searchable: false
-                }
-            ]
-        });
-    } );
+
 
     $(document).on('change', '.document-checkbox', function() {
         var selectedDocuments = [];
@@ -237,7 +182,7 @@
 
     $(document).on('change', '#selectAllCheckbox', function() {
         const checkboxes = document.querySelectorAll('#dataTable3 tbody .form-check-input');
-            
+
         checkboxes.forEach(function(checkbox) {
             checkbox.checked = selectAllCheckbox.checked;
         });

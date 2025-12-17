@@ -5,7 +5,7 @@
             <nav>
                 <ul class="metismenu" id="menu">
                     <li class="{{ (Request::is('admin') ? 'active' : '') }}"><a href="{{ route('admin.index') }}"><span>Home</span></a></li>
-                    <li><a href="../"><span>Kembali ke Toko</span></a></li>
+                    {{-- <li><a href="../"><span>Kembali ke Toko</span></a></li> --}}
                     <li class="{{ (Request::is('admin/manageorder') ? 'active' : '') }}">
                         <a href="{{ route('admin.manageorder.index') }}"><i class="ti-dashboard"></i><span>Kelola Pesanan</span></a>
                     </li>
@@ -23,7 +23,7 @@
                     <li>
                         <a href="{{ route('admin.logout') }}"><span>Logout</span></a>
                     </li>
-                    
+
                 </ul>
             </nav>
         </div>

@@ -24,21 +24,11 @@ class UserSeeder extends Seeder
         ])->assignRole('admin');
 
         User::create([
-            'name' => 'Losss',
+            'name' => 'Awal',
             'email' => 'user@gmail.com',
             'notelp' => '082192598451',
             'alamat' => 'Manding',
             'password' => Hash::make('password')
         ])->assignRole('member');
-
-        User::create([
-            'name' => 'Ryan',
-            'email' => 'user1@gmail.com',
-            'notelp' => '082192598451',
-            'alamat' => 'Manding',
-            'password' => Hash::make('password')
-        ])->assignRole('member');
-
-        User::factory(8)->create();
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('content')   
+@section('content')
 <!-- main content area start -->
     <div class="main-content-inner">
         <!-- market value area start -->
@@ -35,41 +35,4 @@
 @endsection
 
 @section('script')
-<script>
-    $(document).ready( function () {
-        $('#dataTable3').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('admin.dataTable.getOrderData') }}"
-            },
-            columns: [
-                {
-                    data: 'no',
-                    name: 'no'
-                },
-                {
-                    data: 'invoice',
-                    name: 'invoice'
-                },
-                {
-                    data: 'customer',
-                    name: 'customer'
-                },
-                {
-                    data: 'tanggal',
-                    name: 'tanggal'
-                },
-                {
-                    data: 'total',
-                    name: 'total'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                }
-            ]
-        });
-    } );
-</script>
 @endsection
