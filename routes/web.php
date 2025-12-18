@@ -12,8 +12,6 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\UserController as AdminUserController;
 use App\Http\Controllers\auth\RegisterController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 
 /*
@@ -39,7 +37,6 @@ Route::get('/product', [UserController::class, 'search'])->name('product.search'
 // routeAuthenticate
 
 Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [LogoutController::class, 'logout']);
 Route::get('/register', [UserController::class, 'register']);

@@ -42,7 +42,7 @@
 				</form>
 			</div>
 			<h4>Belum terdaftar?</h4>
-			<p><a href="{{ route('register') }}">Daftar Sekarang</a></p>
+			<p><a href="#">Daftar Sekarang</a></p>
 		</div>
 	</div>
 	<!-- //login -->

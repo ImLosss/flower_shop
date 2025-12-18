@@ -20,7 +20,7 @@
         </div>
         @role('member')
             <div class="product_list_header">
-                <a href="{{ route('cart') }}"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                <a href="#"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
                 </a>
             </div>
         @endrole
